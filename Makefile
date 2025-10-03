@@ -23,6 +23,7 @@ start-master:
 	@nohup weed master -ip=localhost -port=9333 > master.log 2>&1 &
 
 start-volume:
+	@mkdir -p /tmp/seaweedfs_data
 	@nohup weed volume -ip=localhost -port=8080 -mserver=localhost:9333 -dir=/tmp/seaweedfs_data > volume.log 2>&1 &
 
 stop-master:
@@ -30,3 +31,5 @@ stop-master:
 
 stop-volume:
 	@pkill -f "weed volume"
+
+stop: stop-master stop-volume
