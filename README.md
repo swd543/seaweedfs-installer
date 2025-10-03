@@ -15,18 +15,6 @@ This repository provides a Makefile and helper scripts to automate the download,
 - Linux ARM64 system
 - `curl`, `tar`, `make`, and `sudo` installed
 
-### Download and Extract
-```sh
-make get-latest-release
-make extract-latest-binary
-```
-
-### Add to PATH
-```sh
-make add-to-path
-source ~/.bashrc
-```
-
 ### Install to /usr/local/bin
 ```sh
 make install
