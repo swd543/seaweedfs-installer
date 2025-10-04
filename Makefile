@@ -19,17 +19,14 @@ uninstall:
 	@rm -rf bin
 	@sed -i '/seaweedfs\/bin/d' ~/.bashrc || true
 	
-start-master:
-	@nohup weed master -ip=localhost -port=9333 > master.log 2>&1 &
+start-server:
+	@nohup weed server -ip=localhost -master.port=9333 -volume.port=8080 -filer -s3 > server.log 2>&1 &
 
-start-volume:
-	@mkdir -p /tmp/seaweedfs_data
-	@nohup weed volume -ip=localhost -port=8080 -mserver=localhost:9333 -dir=/tmp/seaweedfs_data > volume.log 2>&1 &
+stop-server:
+	@pkill -f "weed server"
 
-stop-master:
-	@pkill -f "weed master"
+stop: stop-server
+	@echo "SeaweedFS server stopped."
 
-stop-volume:
-	@pkill -f "weed volume"
-
-stop: stop-master stop-volume
+start-all: start-server
+	@echo "SeaweedFS server started."
